@@ -22,3 +22,9 @@ aldeed:simple-schema
 aldeed:collection2
 dylankoji:many-to-many
 matteodem:easy-search
+
+# accounts
+accounts-ui
+less
+accounts-base
+accounts-password
