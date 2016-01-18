@@ -22,6 +22,8 @@ aldeed:simple-schema
 aldeed:collection2
 dylankoji:many-to-many
 matteodem:easy-search
+socialize:linkable-model
+socialize:base-model
 
 # accounts
 accounts-ui
