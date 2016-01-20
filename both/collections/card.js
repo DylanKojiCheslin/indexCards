@@ -26,9 +26,12 @@ Card.appendSchema({
   // "tags":{
   //   type:
   // },
-  "createdBy":{
-    type: SimpleSchema.RegEx.Id,
-  },
+  // "createdBy":{
+  //   type: SimpleSchema.RegEx.Id,
+  //   autoform: {
+  //     type: "hidden",
+  //   }
+  // },
 });
 
 //Card.methods({});
