@@ -19,6 +19,7 @@ caching-compiler@1.0.0
 caching-html-compiler@1.0.2
 callback-hook@1.0.4
 check@1.1.0
+chrismbeckett:toastr@2.1.2_1
 coffeescript@1.0.11
 cosmos:browserify@0.9.3
 ddp@1.2.2
@@ -53,6 +54,7 @@ localstorage@1.0.5
 logging@1.0.8
 matb33:collection-hooks@0.7.15
 matteodem:easy-search@2.0.0
+mdg:validated-method@1.0.1
 meteor@1.1.10
 meteor-base@1.0.1
 meteorhacks:meteorx@1.0.2
