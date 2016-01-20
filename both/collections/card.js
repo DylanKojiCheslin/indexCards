@@ -13,7 +13,7 @@ Card.collection.allow({
 });
 
 Card.appendSchema({
-  "questions":{
+  "question":{
     type: String,
   },
   "answer":{
