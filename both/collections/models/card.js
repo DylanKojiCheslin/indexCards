@@ -1,5 +1,38 @@
 Card = ManyModel.extendAndSetupCollection("card");
 
+Card.schema = new SimpleSchema({
+  "question":{
+    type: String,
+  },
+  "answer":{
+    type: String,
+  },
+  "difficulty":{
+    type: Number,
+  },
+  "createdBy":{
+    type: SimpleSchema.RegEx.Id,
+    optional: true,
+    autoform: {
+      type: "hidden",
+    },
+  },
+});
+
+Card.appendSchema(Card.schema);
+
+Card.meteorMethods = {};
+
+Card.meteorMethods.insertCard = new ValidatedMethod ({
+  name: "Card.meteorMethods.insertCard",
+  validate: function(){
+      return Card.schema.validator()
+    },
+  run: function( stuff ) {
+      Card.collection.insert(stuff);
+    },
+});
+
 Card.collection.allow({
   insert: function(){
     return false;
@@ -11,27 +44,3 @@ Card.collection.allow({
     return false;
   }
 });
-
-Card.appendSchema({
-  "question":{
-    type: String,
-  },
-  "answer":{
-    type: String,
-  },
-  "difficulty":{
-    type: Number,
-  },
-  //tags to be refrenced by ManyModel
-  // "tags":{
-  //   type:
-  // },
-  // "createdBy":{
-  //   type: SimpleSchema.RegEx.Id,
-  //   autoform: {
-  //     type: "hidden",
-  //   }
-  // },
-});
-
-//Card.methods({});
