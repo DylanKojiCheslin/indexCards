@@ -39,3 +39,5 @@ kadira:flow-router
 audit-argument-checks
 chrismbeckett:toastr
 mdg:validated-method
+reactive-var
+aldeed:template-extension

@@ -26,11 +26,27 @@ Card.meteorMethods = {};
 Card.meteorMethods.insertCard = new ValidatedMethod ({
   name: "Card.meteorMethods.insertCard",
   validate: function(){
-      return Card.schema.validator()
+      return Card.schema.validator();
     },
   run: function( stuff ) {
       Card.collection.insert(stuff);
     },
+});
+
+Card.meteorMethods.updateCard = new ValidatedMethod ({
+  name: "Card.meteorMethods.updateCard",
+  validate: function(){
+    return Card.schema.validator();
+  },
+  run: function( stuff ){
+    var documentId = stuff._id;
+    var modifier = stuff.modifier;
+    var callbackResponse = {
+      toastrTitle:"success",toastrMessage:"Card Updated"
+    };
+    Card.collection.update(documentId, modifier);
+        return callbackResponse;
+  },
 });
 
 Card.collection.allow({
