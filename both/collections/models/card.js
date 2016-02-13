@@ -25,6 +25,12 @@ Card.meteorMethods = {};
 
 Card.meteorMethods.insertCard = new ValidatedMethod ({
   name: "Card.meteorMethods.insertCard",
+  mixins : [LoggedInMixin],
+  checkLoggedInError: {
+    error: 'notLogged',
+    message: 'You need to be logged in to call this method',
+    reason: 'You need to login'
+  },
   validate: function(){
       return Card.schema.validator();
     },
