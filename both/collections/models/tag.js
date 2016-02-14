@@ -1,9 +1,11 @@
 Tag = ManyModel.extendAndSetupCollection("tag");
 
 Tag.schema = new SimpleSchema({
-  "tag":{
+  "text":{
     type: String,
   },
 });
 
-Card.appendSchema(Card.schema);
+Tag.appendSchema(Tag.schema);
+
+Tag.meteorMethods = {};
