@@ -39,7 +39,7 @@ Meteor.startup(function () {
       {tag: "Web Development"},
     ];
     initSubjects.forEach(function(entry) {
-      Rooms.insert(entry);
+      Tag.collection.insert(entry);
     });
   }
 });
