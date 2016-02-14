@@ -11,5 +11,12 @@
     type="method-update" meteormethod="Card.meteorMethods.updateCard"
     fields="question, answer, difficulty" buttonContent="Update"
     singleMethodArgument=true}}
+
+    {{> quickForm collection="Card.collection" doc=this id="deleteCardForm"
+    type="method-update" meteormethod="Card.meteorMethods.deleteCard"
+    omitFields="question, answer, difficulty"
+    buttonContent="delete"
+    singleMethodArgument=true}}
+    
   {{/if}}
 </template>
