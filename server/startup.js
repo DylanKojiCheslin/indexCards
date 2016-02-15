@@ -1,5 +1,5 @@
 Meteor.startup(function () {
-  if (Tag.collection.findOne()) {
+  if ( ! Tag.collection.findOne()) {
     var initTags = [
       {text: "Accounting"},
       {text: "Agriculture"},
