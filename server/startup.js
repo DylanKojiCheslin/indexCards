@@ -27,7 +27,7 @@ Meteor.startup(function () {
       {text: "marketing"},
       {text: "mathematics"},
       {text: "philosophy"},
-      {text: "political Science"},
+      {text: "political science"},
       {text: "psychology"},
       {text: "public Relations"},
       {text: "sociology"},
