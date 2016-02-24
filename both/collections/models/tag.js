@@ -23,9 +23,9 @@ Tag.meteorMethods.checkExists = new ValidatedMethod ({
     },
   run: function( tag ) {
     if ( ! this.isSimulation) {
-      var tagExists = Tag.collection.findOne({"text": tag})
+      var tagExists = Tag.collection.findOne({"text": tag});
       if (tagExists) {
-        return tagExists._id
+        return tagExists._id;
       }
       else{
         return false;
@@ -42,7 +42,7 @@ Meteor.methods({
       var tagExists = Tag.collection.findOne({text: tag});
       console.log(tagExists);
       if (tagExists) {
-        return tagExists._id
+        return tagExists._id;
       }
       else{
         return false;
