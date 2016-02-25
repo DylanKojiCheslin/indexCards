@@ -24,8 +24,6 @@ Template.cardStub.events({
   },
 });
 
-
-
 //Autoform Hooks
 var updateCardHooks = {
   formToModifier: {
@@ -42,6 +40,6 @@ var updateCardHooks = {
   },
 };
 
-  AutoForm.hooks({
-    updateCardForm: updateCardHooks,
-  });
+AutoForm.hooks({
+  updateCardForm: updateCardHooks,
+});

@@ -27,9 +27,6 @@ Tag.meteorMethods.checkExists = new ValidatedMethod ({
       if (tagExists) {
         return tagExists._id;
       }
-      else{
-        return false;
-      }
     }
   }
 });
@@ -37,15 +34,10 @@ Tag.meteorMethods.checkExists = new ValidatedMethod ({
 Meteor.methods({
   check:function( tag ) {
     check(tag, Match.Any);
-    console.log(tag);
     if ( ! this.isSimulation) {
       var tagExists = Tag.collection.findOne({text: tag});
-      console.log(tagExists);
       if (tagExists) {
         return tagExists._id;
-      }
-      else{
-        return false;
       }
     }
   }
