@@ -30,15 +30,3 @@ Tag.meteorMethods.checkExists = new ValidatedMethod ({
     }
   }
 });
-
-Meteor.methods({
-  check:function( tag ) {
-    check(tag, Match.Any);
-    if ( ! this.isSimulation) {
-      var tagExists = Tag.collection.findOne({text: tag});
-      if (tagExists) {
-        return tagExists._id;
-      }
-    }
-  }
-});
