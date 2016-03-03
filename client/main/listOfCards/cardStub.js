@@ -26,18 +26,21 @@ Template.cardStub.events({
 
 //Autoform Hooks
 var updateCardHooks = {
-  formToModifier: {
-    "method-update": function(error, result) {
+  after:{
+    "method-update": function(error,result) {
       var self = this;
+      console.log(self);
       if(error){
-        toastr.error(error.reason,'Error');
+        toastr.error(error,'Error');
       }
       if(result){
+        console.log(result);
         self.template.get("isBeingEdited").set(false);
         toastr.success(result.toastrMessage, result.toastrTitle);
       }
     }
-  },
+
+  }
 };
 
 AutoForm.hooks({
