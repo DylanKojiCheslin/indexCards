@@ -21,6 +21,8 @@ Tag.meteorMethods.checkExists = new ValidatedMethod ({
   validate: function(){
       return Tag.schema.validator();
     },
+    //this would be better as a static method of a class
+    //how to do this as a ValidatedMethod
   run: function( tag ) {
     if ( ! this.isSimulation) {
       var tagExists = Tag.collection.findOne({"text": tag});
