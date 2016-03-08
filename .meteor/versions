@@ -56,6 +56,7 @@ logging@1.0.8
 matb33:collection-hooks@0.7.15
 matteodem:easy-search@2.0.0
 mdg:validated-method@1.0.1
+mdg:validation-error@0.5.1
 meteor@1.1.10
 meteor-base@1.0.1
 meteorhacks:meteorx@1.0.2

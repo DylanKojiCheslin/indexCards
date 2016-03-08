@@ -42,3 +42,4 @@ mdg:validated-method
 reactive-var
 aldeed:template-extension
 tunifight:loggedin-mixin
+mdg:validation-error
