@@ -4,3 +4,11 @@ Meteor.publish("listOfCards", function(){
     return stuff;
   }
 });
+
+
+Meteor.publish("listOfTags", function(){
+  if (this.userId) {
+    var stuff = Tag.collection.find();
+    return stuff;
+  }
+});
