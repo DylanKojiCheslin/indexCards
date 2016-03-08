@@ -15,6 +15,24 @@ var linkSchema = new SimpleSchema({
   tagId: { type: SimpleSchema.RegEx.Id }
 });
 
+//inset meteor method
+Tag.meteorMethods.insertTag = new ValidatedMethod ({
+  name: "Tag.meteorMethods.insertTag",
+  mixins : [LoggedInMixin],
+  checkLoggedInError: {
+    error: 'notLogged',
+    reason: 'You need to login',
+    message: 'You need to be logged in to call Tag.insertTag',
+  },
+  validate: function(){
+      return Card.schema.validator();
+    },
+  run: function( doc ) {
+      Tag.collection.insert(doc);
+    },
+});
+
+
 //link to card
 Tag.meteorMethods.linkToCard = new ValidatedMethod({
   name : "Tag.meteorMethods.linkToCard",
