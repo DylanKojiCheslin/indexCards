@@ -1,5 +1,5 @@
 Meteor.startup(function () {
-  if ( ! Tag.collection.findOne()) {
+  if ( ! Tag.findOne()) {
     var initTags = [
       {text: "accounting"},
       {text: "agriculture"},
@@ -39,7 +39,7 @@ Meteor.startup(function () {
       {text: "web development"},
     ];
     initTags.forEach(function(entry) {
-      Tag.collection.insert(entry);
+      Tag.insert(entry);
     });
   }
 });

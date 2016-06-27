@@ -1,12 +1,12 @@
-Tag = ManyModel.extendAndSetupCollection("tag");
-
+// Tag = ManyModel.extendAndSetupCollection("tag");
+Tag = new Mongo.Collection('tag');
 Tag.schema = new SimpleSchema({
   "text":{
     type: String,
   },
 });
 
-Tag.appendSchema(Tag.schema);
+Tag.attachSchema(Tag.schema);
 
 Tag.meteorMethods = {};
 
@@ -24,11 +24,11 @@ Tag.meteorMethods.insertTag = new ValidatedMethod ({
     reason: 'You need to login',
     message: 'You need to be logged in to call Tag.insertTag',
   },
-  validate: function(){
-      return Card.schema.validator();
+  validate: function(doc){
+      Tag.schema.validate(doc);
     },
   run: function( doc ) {
-      Tag.collection.insert(doc);
+      Tag.insert(doc);
     },
 });
 
@@ -48,7 +48,7 @@ Tag.meteorMethods.linkToCard = new ValidatedMethod({
   run: function ( cardId,  tagId ) {
     if ( ! this.isSimulation ) {
       //find this find this tag
-      var thisTag = Tag.collection.findOne({ _id : tagId });
+      var thisTag = Tag.findOne({ _id : tagId });
       //link from tag to card
       if ( thisTag ) {
         thisTag.linkCard( cardId );
@@ -72,7 +72,7 @@ Tag.meteorMethods.checkExists = new ValidatedMethod ({
     //how to do this as a ValidatedMethod
   run: function( tag ) {
     if ( ! this.isSimulation) {
-      var tagExists = Tag.collection.findOne({"text": tag});
+      var tagExists = Tag.findOne({"text": tag});
       if (tagExists) {
         return tagExists._id;
       }

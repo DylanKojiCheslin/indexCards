@@ -1,4 +1,4 @@
-Card = ManyModel.extendAndSetupCollection("card");
+Card = new Mongo.Collection('card');
 
 Card.schema = new SimpleSchema({
   "question":{
@@ -19,7 +19,7 @@ Card.schema = new SimpleSchema({
   },
 });
 
-Card.appendSchema(Card.schema);
+Card.attachSchema(Card.schema);
 
 Card.meteorMethods = {};
 
@@ -32,12 +32,12 @@ Card.meteorMethods.insertCard = new ValidatedMethod ({
     message: 'You need to be logged in to call this method',
     reason: 'You need to login'
   },
-  validate: function(){
-      return Card.schema.validator();
+  validate: function(doc){
+      return Card.schema.validate(doc);
     },
   run: function( doc ) {
       doc.createdBy = Meteor.userId()
-      Card.collection.insert(doc);
+      Card.insert(doc);
     },
 });
 
@@ -50,8 +50,8 @@ Card.meteorMethods.updateCard = new ValidatedMethod ({
     message: 'You need to be logged in to call this method',
     reason: 'You need to login'
   },
-  validate: function(){
-    return Card.schema.validator();
+  validate: function(doc){
+    return Card.schema.validate(doc);
   },
   run: function( doc ){
     var documentId = doc._id;
@@ -60,14 +60,14 @@ Card.meteorMethods.updateCard = new ValidatedMethod ({
       toastrTitle:"success",toastrMessage:"Card Updated"
     };
     if ( ! this.isSimulation) {
-      var realThing = Card.collection.findOne(
+      var realThing = Card.findOne(
         documentId,
         { fields: { "createdBy": 1, _id: 1 }}
       );
       if (realThing.createdBy !== Meteor.userId()) {
          throw new Meteor.Error("access denied", "can only edit if you made it");
       }
-    Card.collection.update(documentId, modifier);
+    Card.update(documentId, modifier);
         return callbackResponse;
     }
   },
@@ -82,8 +82,8 @@ Card.meteorMethods.deleteCard = new ValidatedMethod ({
     message: 'You need to be logged in to delete this card',
     reason: 'You need to login'
   },
-  validate: function(){
-    return Card.schema.validator();
+  validate: function(doc){
+    Card.schema.validate(doc);
   },
   run: function( doc ){
     var documentId = doc._id;
@@ -92,23 +92,21 @@ Card.meteorMethods.deleteCard = new ValidatedMethod ({
       toastrTitle:"success",toastrMessage:"Card Deleted"
     };
     if ( ! this.isSimulation) {
-      var realThing = Card.collection.findOne(
+      var realThing = Card.findOne(
         documentId,
         { fields: { "createdBy": 1, _id: 1 }}
       );
       if (realThing.createdBy !== Meteor.userId()) {
          throw new Meteor.Error("access denied", "can only edit if you made it");
       }
-    Card.collection.remove(documentId);
+    Card.remove(documentId);
         return callbackResponse;
     }
   },
 });
 
-Card.methods({
-});
 
-Card.collection.allow({
+Card.allow({
   insert: function(){
     return false;
   },

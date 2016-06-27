@@ -20,10 +20,7 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 aldeed:autoform
 aldeed:simple-schema
 aldeed:collection2
-dylankoji:many-to-many
 matteodem:easy-search
-socialize:linkable-model
-socialize:base-model
 
 # accounts
 accounts-ui
@@ -43,3 +40,4 @@ reactive-var
 aldeed:template-extension
 tunifight:loggedin-mixin
 mdg:validation-error
+zaku:smart-record

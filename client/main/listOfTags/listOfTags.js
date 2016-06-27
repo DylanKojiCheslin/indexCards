@@ -4,6 +4,6 @@ Template.listOfTags.onCreated(function (){
 
 Template.listOfTags.helpers({
     ofTheTags : function(){
-        return Tag.collection.find();
+        return Tag.find();
     },
 });
