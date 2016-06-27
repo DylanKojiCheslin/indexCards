@@ -34,28 +34,30 @@ Tag.meteorMethods.insertTag = new ValidatedMethod ({
 
 
 //link to card
-Tag.meteorMethods.linkToCard = new ValidatedMethod({
-  name : "Tag.meteorMethods.linkToCard",
-  mixins : [LoggedInMixin],
-  checkLoggedInError: {
-    error: 'notLogged',
-    message: 'You need to be logged in to call Tag.linkToCard',
-    reason: 'You need to login'
-  },
-  validate: function(){
-    return linkSchema.validator()
-  },
-  run: function ( cardId,  tagId ) {
-    if ( ! this.isSimulation ) {
-      //find this find this tag
-      var thisTag = Tag.findOne({ _id : tagId });
-      //link from tag to card
-      if ( thisTag ) {
-        thisTag.linkCard( cardId );
-      }
-    }
-  }
-})
+// replace with linking for the smart models package
+//
+// Tag.meteorMethods.linkToCard = new ValidatedMethod({
+//   name : "Tag.meteorMethods.linkToCard",
+//   mixins : [LoggedInMixin],
+//   checkLoggedInError: {
+//     error: 'notLogged',
+//     message: 'You need to be logged in to call Tag.linkToCard',
+//     reason: 'You need to login'
+//   },
+//   validate: function(){
+//     return linkSchema.validator()
+//   },
+//   run: function ( cardId,  tagId ) {
+//     if ( ! this.isSimulation ) {
+//       //find this find this tag
+//       var thisTag = Tag.findOne({ _id : tagId });
+//       //link from tag to card
+//       if ( thisTag ) {
+//         thisTag.linkCard( cardId );
+//       }
+//     }
+//   }
+// })
 
 Tag.meteorMethods.checkExists = new ValidatedMethod ({
   name: "Tag.meteorMethods.checkExists",

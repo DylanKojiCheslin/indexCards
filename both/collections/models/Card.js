@@ -33,7 +33,7 @@ Card.meteorMethods.insertCard = new ValidatedMethod ({
     reason: 'You need to login'
   },
   validate: function(doc){
-      return Card.schema.validate(doc);
+      Card.schema.validate(doc);
     },
   run: function( doc ) {
       doc.createdBy = Meteor.userId()
@@ -51,7 +51,7 @@ Card.meteorMethods.updateCard = new ValidatedMethod ({
     reason: 'You need to login'
   },
   validate: function(doc){
-    return Card.schema.validate(doc);
+    Card.schema.validate(doc);
   },
   run: function( doc ){
     var documentId = doc._id;
