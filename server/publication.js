@@ -1,6 +1,6 @@
 Meteor.publish("listOfCards", function(){
   if (this.userId) {
-    var stuff = Card.find();
+    var stuff = Card.cursor({});
     return stuff;
   }
 });
@@ -8,7 +8,7 @@ Meteor.publish("listOfCards", function(){
 
 Meteor.publish("listOfTags", function(){
   if (this.userId) {
-    var stuff = Tag.find();
+    var stuff = Tag.cursor();
     return stuff;
   }
 });

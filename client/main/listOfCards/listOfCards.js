@@ -4,6 +4,6 @@ Template.listOfCards.onCreated(function (){
 
 Template.listOfCards.helpers({
     ofTheCards : function(){
-        return Card.find();
+        return Card.cursor();
     },
 });

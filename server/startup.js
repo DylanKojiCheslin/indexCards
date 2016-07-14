@@ -1,5 +1,7 @@
 Meteor.startup(function () {
-  if ( ! Tag.findOne()) {
+  //if there are no tags make some
+  if (Tag.isEmpty()) {
+    console.log("generating example Tags");
     var initTags = [
       {text: "accounting"},
       {text: "agriculture"},
@@ -39,7 +41,44 @@ Meteor.startup(function () {
       {text: "web development"},
     ];
     initTags.forEach(function(entry) {
-      Tag.insert(entry);
+      var tag = Tag.build(entry);
+      tag.save();
     });
+  }
+
+//find philosophy
+var tagExample = Tag.find({text: "psychology"});
+
+  if (Card.isEmpty()) {
+    console.log("generating example Tags");
+
+    var initCards = [
+      {
+        question:"how you do that?",
+        answer:"skills",
+        difficulty:1,
+        //change to use the id of a user who is created druing startup
+        createdBy:"507f191e810c19729de860ea",
+      },
+      {
+        question:"why you do that?",
+        answer:"because",
+        difficulty:1,
+        //change to use the id of a user who is created druing startup
+        createdBy:"507f191e810c19729de860ea",
+      },
+      {
+        question:"do it again?",
+        answer:"probly",
+        difficulty:1,
+        //change to use the id of a user who is created druing startup
+        createdBy:"507f191e810c19729de860ea",
+      },
+    ];
+    initCards.forEach(function(entry) {
+      var card = Card.build(entry);
+      entry.tagID = tagExample.id;
+      card.save()
+    })
   }
 });

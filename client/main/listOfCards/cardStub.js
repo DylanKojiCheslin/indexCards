@@ -22,19 +22,23 @@ Template.cardStub.events({
         template.isBeingEdited.set(true);
       }
   },
+  "click .cancel-editing-of-card": function(event, template){
+    event.preventDefault();
+    if ( template.isBeingEdited.get() == true) {
+      template.isBeingEdited.set(false);
+    }
+  }
 });
 
 //Autoform Hooks
 var updateCardHooks = {
   after:{
-    "method-update": function(error,result) {
+    "method": function(error,result) {
       var self = this;
-      console.log(self);
       if(error){
-        toastr.error(error,'Error');
+        toastr.error(error.message,error.reson);
       }
       if(result){
-        console.log(result);
         self.template.get("isBeingEdited").set(false);
         toastr.success(result.toastrMessage, result.toastrTitle);
       }

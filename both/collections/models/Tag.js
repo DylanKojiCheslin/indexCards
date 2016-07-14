@@ -1,19 +1,20 @@
-// Tag = ManyModel.extendAndSetupCollection("tag");
-Tag = new Mongo.Collection('tag');
-Tag.schema = new SimpleSchema({
-  "text":{
-    type: String,
-  },
-});
+Tag = class Tag extends SmartModel {
+  static schema() {
+    return {
+      "text":{
+        type: String,
+      }
+    }
+  }
 
-Tag.attachSchema(Tag.schema);
+  get hasMany() {
+    return {
+      cards: {}
+    }
+  }
+}
 
 Tag.meteorMethods = {};
-
-var linkSchema = new SimpleSchema({
-  cardId: { type: SimpleSchema.RegEx.Id },
-  tagId: { type: SimpleSchema.RegEx.Id }
-});
 
 //inset meteor method
 Tag.meteorMethods.insertTag = new ValidatedMethod ({
@@ -25,39 +26,14 @@ Tag.meteorMethods.insertTag = new ValidatedMethod ({
     message: 'You need to be logged in to call Tag.insertTag',
   },
   validate: function(doc){
-      Tag.schema.validate(doc);
+    new SimpleSchema(
+      Tag.schema()
+    ).validator(doc);
     },
   run: function( doc ) {
-      Tag.insert(doc);
+      Tag.create(doc);
     },
 });
-
-
-//link to card
-// replace with linking for the smart models package
-//
-// Tag.meteorMethods.linkToCard = new ValidatedMethod({
-//   name : "Tag.meteorMethods.linkToCard",
-//   mixins : [LoggedInMixin],
-//   checkLoggedInError: {
-//     error: 'notLogged',
-//     message: 'You need to be logged in to call Tag.linkToCard',
-//     reason: 'You need to login'
-//   },
-//   validate: function(){
-//     return linkSchema.validator()
-//   },
-//   run: function ( cardId,  tagId ) {
-//     if ( ! this.isSimulation ) {
-//       //find this find this tag
-//       var thisTag = Tag.findOne({ _id : tagId });
-//       //link from tag to card
-//       if ( thisTag ) {
-//         thisTag.linkCard( cardId );
-//       }
-//     }
-//   }
-// })
 
 Tag.meteorMethods.checkExists = new ValidatedMethod ({
   name: "Tag.meteorMethods.checkExists",
@@ -67,17 +43,31 @@ Tag.meteorMethods.checkExists = new ValidatedMethod ({
     message: 'You need to be logged in to call Tag.checkExists',
     reason: 'You need to login'
   },
-  validate: function(){
-      return Tag.schema.validator();
-    },
+  validate: function(doc){
+    new SimpleSchema(
+      Tag.schema()
+    ).validator(doc);
+  },
     //this would be better as a static method of a class
     //how to do this as a ValidatedMethod
   run: function( tag ) {
     if ( ! this.isSimulation) {
-      var tagExists = Tag.findOne({"text": tag});
+      var tagExists = Tag.find({"text": tag.text});
       if (tagExists) {
         return tagExists._id;
       }
     }
+  }
+});
+
+Tag.allow({
+  insert: function(){
+    return false;
+  },
+  update: function(){
+    return false;
+  },
+  remove: function(){
+    return false;
   }
 });
