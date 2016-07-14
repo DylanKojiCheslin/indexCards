@@ -47,10 +47,7 @@ Card.meteorMethods.insertCard = new ValidatedMethod ({
   run: function( doc ) {
     if (! this.isSimulation) {
       if(Meteor.isServer){
-        console.log(Meteor.userId());
       doc.createdBy = Meteor.userId();
-      console.log(Meteor.userId());
-      console.log(doc);
       Card.create(doc);
       }
     }
@@ -104,17 +101,14 @@ Card.meteorMethods.deleteCard = new ValidatedMethod ({
     ).validator(doc);
   },
   run: function( doc ){
-    var documentId = doc._id;
-    var modifier = doc.modifier;
+    let documentId = doc._id;
     if ( ! this.isSimulation) {
-      var realThing = Card.find(
-        documentId,
-        { fields: { "createdBy": 1, _id: 1 }}
-      );
-      if (realThing.createdBy !== Meteor.userId()) {
-        throw new Meteor.Error("access denied", "can only edit if you made it");
+      let thisCard = Card.find(documentId);
+      if (thisCard) {
+        thisCard.destroy(documentId);
+      }else {
+        console.log('Card.meteorMethods.deleteCard error no card found to delete');
       }
-      Card.remove(documentId);
 
       var callbackResponse = {
         toastrTitle:"success",toastrMessage:"Card Deleted"
