@@ -72,62 +72,19 @@ Card.meteorMethods.updateCard = new ValidatedMethod ({
     ).validator(doc);
   },
   run: function( doc ){
-    console.log(doc);
-    console.log(doc._id);
-    //there is no doc._id
-    //how to search for the current thing
     var documentId = doc._id;
-    console.log('both');
-      console.log('!isSimulation ' + !this.isSimulation);
     if ( ! this.isSimulation) {
-    // console.log('Meteor.isServer ' + Meteor.isServer);
-    if(Meteor.isServer){
-      console.log(Meteor.userId());
-      console.log('servercode');
-      console.log(Meteor.userId()+" Meteor.userId()");
-      var realThing = Card.find(
-        documentId
-        // ,
-        // { fields:
-        //   {
-        //     "createdBy": 1
-        //   ,
-        //   _id: 1
-        //   }
-        // }
-      );
-      console.log('realThing');
-      console.log(realThing);
-      let realOwnersId = realThing.attributes({pick: ['createdBy']}) === {
-        createdBy: Meteor.userId()
-      };
-      console.log(realOwnersId + " realOwnersId");
-      // console.log(realThing.createdBy + "realThing.createdBy");
-      // console.log(realThing._deps.createdBy + "realThing._deps.createdBy");
+      if(Meteor.isServer){
+        var realThing = Card.find(
+          {'question': doc.question,'answer': doc.answer}
+        );
+        realThing.update(doc);
 
-      //model object has a createdBy property that is being used for the search
-      console.log(Meteor.userId());
-      if (realOwnersId !== Meteor.userId()) {
-        throw new Meteor.Error("access denied", "can only edit if you made it");
-        console.log('realThing.createdBy ' + realThing.createdBy);
-        console.log('Meteor.userId() ' + Meteor.userId());
-      }else {
-        console.log('realThing.createdBy === Meteor.userId()');
+        var callbackResponse = {
+          toastrTitle:"success",toastrMessage:"Card Updated"
+        };
+        return callbackResponse;
       }
-
-      // console.log(realThing);
-      console.log('stuff');
-      realThing.update(doc);
-
-      var callbackResponse = {
-        toastrTitle:"success",toastrMessage:"Card Updated"
-      };
-      return callbackResponse;
-    }
-    }
-    //is a simulation
-    else {
-      console.log(this);
     }
   },
 });

@@ -42,8 +42,7 @@ var updateCardHooks = {
         self.template.get("isBeingEdited").set(false);
         toastr.success(result.toastrMessage, result.toastrTitle);
       }
-    }
-
+    },
   }
 };
 
