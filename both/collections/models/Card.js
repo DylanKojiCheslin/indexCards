@@ -1,16 +1,16 @@
 Card = class Card extends SmartModel{
   static schema() {
     return {
-      "question":{
+      question:{
         type: String,
       },
-      "answer":{
+      answer:{
         type: String,
       },
-      "difficulty":{
+      difficulty:{
         type: Number,
       },
-      "createdBy":{
+      createdBy:{
         type: SimpleSchema.RegEx.Id,
         optional: true,
         autoform: {
@@ -70,6 +70,7 @@ Card.meteorMethods.updateCard = new ValidatedMethod ({
   },
   run: function( doc ){
     var documentId = doc._id;
+    console.log(documentId);
     if ( ! this.isSimulation) {
       if(Meteor.isServer){
         var realThing = Card.find(

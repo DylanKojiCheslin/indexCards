@@ -41,16 +41,19 @@ Meteor.startup(function () {
       {text: "web development"},
     ];
     initTags.forEach(function(entry) {
-      var tag = Tag.build(entry);
+      let tag = Tag.build(entry);
+      console.log(entry);
+      console.log(tag);
       tag.save();
     });
   }
 
 //find philosophy
-var tagExample = Tag.find({text: "psychology"});
-
+let tagExample = Tag.find({text: "psychology"});
+console.log(tagExample);
+// let tagExampleId = tagExample._id;
   if (Card.isEmpty()) {
-    console.log("generating example Tags");
+    console.log("generating example Cards");
 
     var initCards = [
       {
@@ -76,9 +79,11 @@ var tagExample = Tag.find({text: "psychology"});
       },
     ];
     initCards.forEach(function(entry) {
-      var card = Card.build(entry);
-      entry.tagID = tagExample.id;
-      card.save()
+      Card.build(entry);
+      //entry.tagID = tagExample.id;
+      // entry.extend({
+      //   tagId : tagExampleId
+      // });
     })
   }
 });
